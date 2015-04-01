@@ -1,4 +1,3 @@
-@@ -0,0 +1,137 @@
 #!/usr/bin/env python
 # Purpose: Plot time series and histograms of all pairs of dppc P atoms that are initially nearest neighbors
 # Syntax: ./dist_dppc.py dppc_p.xyz
@@ -122,13 +121,22 @@ def plot_timeseries():
 def plot_distribution():
     # row: different pairs of atoms; colume: timeseries for each pair
     data = dist_vs_time()
-    for i in xrange( 50, 51 ):
+    for i in xrange( len(data) ):
         datai = data[i]
-        plt.hist(datai, bins= range(50), normed=True)
+        plt.hist(datai, bins= range(100), normed=True)
     plt.show()
 
 
-plot_distribution()
+# Concatenate the distance of all pairs of nearest neighbor atoms and plot
+def plot_distribution_concat():
+    # row: different pairs of atoms; colume: timeseries for each pair
+    data = dist_vs_time()
+    data_concat = np.concatenate( data )
+    plt.hist(data_concat, bins= range(100), normed=True)
+    plt.show()
+
+
+plot_distribution_concat()
 
 
 
