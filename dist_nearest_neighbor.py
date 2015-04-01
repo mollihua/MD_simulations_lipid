@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # Purpose: Plot time series and histograms of all pairs of dppc P atoms that are initially nearest neighbors
-# Syntax: ./dist_dppc.py test.xyz
+# Syntax: ./dist_nearest_neighbor.py test.xyz
 # Note: no periodic boundary condition is considered yet
 
 
