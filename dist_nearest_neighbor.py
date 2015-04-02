@@ -53,7 +53,7 @@ def find_id_pairs():
         ind1, xyz_ind = i[0], i[1]
         coor_frame1_cp = coor_frame1.copy()
         # avoid self distance calculation
-        coor_frame1_cp[ind1] = [np.nan, np.nan, np.nan] 
+        coor_frame1_cp[ind1] = [9999, 9999, 9999]
         tree = cKDTree( coor_frame1_cp )
         dist, ind2 = tree.query( xyz_ind )
         pair_idlist.append( [ind1, ind2] )
