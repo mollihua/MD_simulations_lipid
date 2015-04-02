@@ -153,6 +153,6 @@ time_beg = time.time()
 plot_distribution_concat()
 time_end = time.time()
 time_elapsed = time_end - time_beg
-print "Elapsed time is ", time_elapsed, " second."
+print "Elapsed time is ", time_elapsed, " seconds."
 
 
