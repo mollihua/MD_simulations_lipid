@@ -117,6 +117,7 @@ def plot_timeseries():
         datai = data[i]
         p1 = plt.plot(time, datai)
     plt.show()
+    plt.close()
 
 
 # Plot distribution of all nearest neighboring atom pairs
@@ -127,6 +128,7 @@ def plot_distribution():
         datai = data[i]
         plt.hist(datai, bins= range(100), normed=True)
     plt.show()
+    plt.close()
 
 
 # Concatenate the distance of all pairs of nearest neighbor atoms and plot
@@ -145,7 +147,7 @@ def plot_distribution_concat():
     plt.ylabel( "Probility" )
     plt.savefig("dppc_p_nn.png")
     #plt.show()
-
+    plt.close()
 
 time_beg = time.time()
 plot_distribution_concat()
