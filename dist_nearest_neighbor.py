@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-# Purpose: Plot time series and histograms of all pairs of dppc P atoms that are initially nearest neighbors
+# Purpose: Plot time series and histograms of all pairs of DPPC P atoms that are initially nearest neighbors
 # Syntax: ./dist_nearest_neighbor.py test.xyz
-# Note: trajectory xyz file is unwrapped -> no problem for periodic boundary condition
+# Note: The molecular system contains DPPC lipid bilayer. 
+#       The trajectory xyz file is unwrapped -> no problem for periodic boundary condition.
 
 
 import numpy as np
