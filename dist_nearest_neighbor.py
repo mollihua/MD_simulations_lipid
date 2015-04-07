@@ -89,7 +89,7 @@ def get_num_frame ():
     return ( ttframenum )
 
 
-# Process the whole trajectory to get time series of the nearest neighbor distance
+# Process the whole trajectory to get time series of the nearest neighbor distance for the P pairs
 def dist_vs_time():
     nnpairlist = find_id_pairs()
     ttframenum = get_num_frame()
