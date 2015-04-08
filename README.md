@@ -1,7 +1,7 @@
 # mindist-membrane-lipids
 
 
-Python scripts for analyzing molecular dynamics simulation trajectories.
+Python and tcl scripts for analyzing molecular dynamics simulation trajectories.
 Molecular system: lipid bilayer system with transmembrane molecules.
 
 
