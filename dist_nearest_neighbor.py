@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-# Purpose: Plot time series and histograms of all pairs of DPPC P atoms that are initially nearest neighbors
-# Syntax: ./dist_nearest_neighbor.py test.xyz
-# Note: The molecular system contains DPPC lipid bilayer. 
-#       The trajectory xyz file is unwrapped -> no problem for periodic boundary condition.
+# Purpose: Plot time series and histograms of all pairs of dppc P atoms that are initially nearest neighbors
+# Syntax: ./dist_nearest_neighbor.py test.xyz frame_beg frame_end
+# Note: if frame_end is -1, will analyze the frames from frame_beg to ttframenum.
+# Note: trajectory xyz file is unwrapped -> no problem for periodic boundary condition.
 
 
 import numpy as np
@@ -54,7 +54,7 @@ def find_id_pairs():
         ind1, xyz_ind = i[0], i[1]
         coor_frame1_cp = coor_frame1.copy()
         # avoid self distance calculation
-        coor_frame1_cp[ind1] = [9999, 9999, 9999]
+        coor_frame1_cp[ind1] = [np.inf, np.inf, np.inf]
         tree = cKDTree( coor_frame1_cp )
         dist, ind2 = tree.query( xyz_ind )
         pair_idlist.append( [ind1, ind2] )
@@ -89,15 +89,17 @@ def get_num_frame ():
     return ( ttframenum )
 
 
-# Process the whole trajectory to get time series of the nearest neighbor distance for the P pairs
-def dist_vs_time():
+# Process the whole trajectory to get time series of the nearest neighbor distance
+def dist_vs_time( frame1, frame2 ):
     nnpairlist = find_id_pairs()
-    ttframenum = get_num_frame()
+    #ttframenum = get_num_frame()
     
     # each subarray is for each pair id
-    timeseries = np.empty( (len(nnpairlist), ttframenum), dtype=float )
+    #timeseries = np.empty( (len(nnpairlist), ttframenum), dtype=float )
+    timeseries = np.empty( (len(nnpairlist), (frame2-frame1+1)), dtype=float )
 
-    for framenum in xrange( 1, ttframenum+1 ):
+    #for framenum in xrange( 1, ttframenum+1 ):
+    for framenum in xrange( frame1, frame2+1 ):
         xyzframe = get_coor_by_frame( framenum )
         for i in xrange( len( nnpairlist )):
             [id1, id2] = nnpairlist[i]
@@ -133,27 +135,39 @@ def plot_distribution():
 
 
 # Concatenate the distance of all pairs of nearest neighbor atoms and plot
-def plot_distribution_concat():
+def plot_distribution_concat( frame1, frame2 ):
 
     # row: different pairs of atoms; colume: timeseries for each pair
-    data = dist_vs_time()
+    data = dist_vs_time( frame1, frame2 )
     data_concat = np.concatenate( data )
 
     # save data_concat into a file
-    np.savetxt( 'dppc_p_nn.dat', data_concat )
+    np.savetxt( 'dppc_p_nnfr%(#)-d_to_fr%($)-d.dat' % {"#": frame1, "$": frame2 } , data_concat )
     
     # plot histogram
-    plt.hist(data_concat, bins= range(100), normed=True)
+    plt.hist(data_concat, bins= range(500), normed=True)
     plt.xlabel( 'distance (' + r'$\AA$' + ')' )
     plt.ylabel( "Probility" )
-    plt.savefig("dppc_p_nn.png")
+    plt.savefig("dppc_p_nn_fr%(#)-d_to_fr%($)-d.png" % {"#": frame1, "$": frame2 } )
     #plt.show()
     plt.close()
 
+
+#### The main program: 
+
+frame_beg = int( sys.argv[2] )
+frame_end = int( sys.argv[3] )
+
 time_beg = time.time()
-plot_distribution_concat()
+
+if frame_end != -1:
+    plot_distribution_concat( frame_beg, frame_end )
+else:
+    ttframenum = get_num_frame()
+    plot_distribution_concat( frame_beg, ttframenum )
+
+
 time_end = time.time()
 time_elapsed = time_end - time_beg
-print "Elapsed time is ", time_elapsed, " seconds."
-
+print "Elapsed time is ", time_elapsed, " second."
 
