@@ -105,7 +105,7 @@ def dist_vs_time( frame1, frame2 ):
             [id1, id2] = nnpairlist[i]
             xyz1, xyz2 = xyzframe[id1], xyzframe[id2]
             dist = np.linalg.norm( xyz1 - xyz2 )
-            timeseries[i,framenum-1] = dist
+            timeseries[i, framenum-frame1] = dist
     return ( timeseries )
 
 
