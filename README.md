@@ -27,8 +27,11 @@ step2:
 
    # analysis:
    
-   ./dist_nearest_neighbor.py dppc_p.xyz
+   ./dist_nearest_neighbor.py dppc_p.xyz 1 -1
+   or
+   ./dist_nearest_neighbor.py dppc_p.xyz <framenum1> <framenum2>
+   for user-defined framenum1 and framenum2
 
    # test: test.xyz is an example file of dppc_p.xyz
    
-   ./dist_nearest_neighbor.py test.xyz
+   ./dist_nearest_neighbor.py test.xyz 1 -1
