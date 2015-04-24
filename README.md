@@ -31,7 +31,7 @@ step2:
    
    or
    
-   ./dist_nearest_neighbor.py dppc_p.xyz <framenum1> <framenum2>
+   ./dist_nearest_neighbor.py dppc_p.xyz framenum1 framenum2
    
    for user-defined framenum1 and framenum2
 
