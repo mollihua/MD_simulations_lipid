@@ -1,10 +1,11 @@
 # MD_simulation_lipids
 
+Tools: Python and Tcl.
+
 Purpose: to calculate the minimum distance between membrane lipid molecules for all frames of trajectory.
 
 Molecular system: lipid bilayer system with transmembrane molecules.
 
-Python and Tcl scripts for analyzing molecular dynamics simulation trajectories.
 
 step1:
 
