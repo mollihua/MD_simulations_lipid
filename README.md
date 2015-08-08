@@ -1,4 +1,4 @@
-# MD_simulation_lipids
+# molecular_dynamics_lipid_bilayer
 
 Tools: Python and Tcl.
 
